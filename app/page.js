@@ -20,7 +20,7 @@ export default function Home() {
 
   useEffect(() => {
     const cargaUsuarios = async () =>{
-      const resp = await fetch("https://randomuser.me/api/?results=10");
+      const resp = await fetch("https://randomuser.me/api/?results=18");
       const respuesta = await resp.json();
       console.log(respuesta);
       setUsuarios(respuesta.results);
@@ -29,15 +29,15 @@ export default function Home() {
     cargaUsuarios();
   }, []);
 
-  // const startConversation = async (usuario) => {
-  //   const conversation = {
-  //     messages: [],
-  //     user: usuario,
-  //   };
+  const startConversation = async (usuario) => {
+    const conversation = {
+      messages: [],
+      user: usuario,
+    };
 
-  //   await addDoc(collection(db, "chats"), conversation);
-  //   Router.push("/chat");
-  // };
+    await addDoc(collection(db, "chats"), conversation);
+    Router.push("/chat");
+  };
 
 
   return (
@@ -50,7 +50,7 @@ export default function Home() {
           <Card
             key={usuario.login.uuid}
             usuario={usuario}
-            // clickHandler ={() => startConversation(usuario)}
+            clickHandler ={() => startConversation(usuario)}
           ></Card>
         ))}
       </section>
