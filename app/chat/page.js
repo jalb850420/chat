@@ -2,10 +2,23 @@
 import { Card } from "@/components/Card";
 import Header from "@/components/Header";
 import { useEffect,useState } from "react";
+import { db } from "@/firebaseConfig";
+import { doc, collection, onSnapshot } from "firebase/firestore";
+import { updateDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
+// import { ChatPanel } from "@/components/chatPanel";
 
 export default function chat() {
   // const [usuarios, setUsuarios] = useState([]);
   const [randomUsers, setRandomUsers] = useState([]);
+  const authUser = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log(authUser);
+    if (authUser === null) router.push("/login")
+  }, [authUser]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -92,7 +105,7 @@ export default function chat() {
           <ul className="space-y-2 max-h-[76vh] overflow-y-auto" >
             
             {randomUsers.map((usuario) => (
-            <li className="flex p-2 items-center gap-2 bg-white rounded shadow"> 
+              <li key={usuario.login.uuid} className="flex p-2 items-center gap-2 bg-white rounded shadow"> 
               <span className="w-2 h-2 rounded-full bg-green-500"></span>
               <div>
                <img src={usuario.picture.medium} 

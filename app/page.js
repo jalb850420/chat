@@ -1,11 +1,22 @@
 'use client'
+import Header  from "@/components/Header";
 import { Card } from "@/components/Card";
-import Header from "@/components/Header";
 import React, { useEffect, useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import { initializeApp } from "firebase/app";
 import { useRouter } from "next/navigation";
+import { collection, getFirestore, addDoc } from "firebase/firestore";
+import { db } from "@/firebaseConfig"; 
 
 export default function Home() {
+  const authUser = useAuth();
+  const router = useRouter();
   const [usuarios,setUsuarios] = useState([]);
+
+  useEffect(() => {
+    console.log(authUser);
+    if (authUser === null) router.push("/login")
+  }, [authUser]);
 
   useEffect(() => {
     const cargaUsuarios = async () =>{
