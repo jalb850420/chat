@@ -1,6 +1,6 @@
 'use client'
-import Header  from "@/components/Header";
-import { Card } from "@/components/Card";
+import Header  from "@/components/Header.jsx";
+import { Card }  from "@/components/Card.jsx";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { initializeApp } from "firebase/app";
@@ -27,6 +27,9 @@ export default function Home() {
     }
 
     cargaUsuarios();
+    const interval = setInterval(cargaUsuarios, 15000); 
+
+    return () => clearInterval(interval);
   }, []);
 
   const startConversation = async (usuario) => {
@@ -36,7 +39,7 @@ export default function Home() {
     };
 
     await addDoc(collection(db, "chats"), conversation);
-    Router.push("/chat");
+    router.push("/chat");
   };
 
 

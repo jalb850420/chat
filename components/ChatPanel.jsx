@@ -45,9 +45,9 @@ export const ChatPanel = ({ selectedChat }) => {
             alt="avatar"
             className="w-10 h-10 rounded-full"
           />
-          <span className="font-semibold">
+          <p className="font-semibold text-black dark:text-black">
             {selectedChat.user.name.first}
-          </span>
+          </p>
         </div>
         <button className="text-blue-600 hover:underline">Perfil</button>
       </div>

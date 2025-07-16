@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 
 export const Card = ({usuario,clickHandler, className = ""})=>{

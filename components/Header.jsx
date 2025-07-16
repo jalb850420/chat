@@ -23,7 +23,7 @@ export default function Header() {
             <nav className="flex gap-4">
                 <Link href="/" className="hover:text-yellow-300 transition">Home</Link>
                 <Link href="/chat" className="hover:text-yellow-300 transition">ir a mis chat´s</Link>
-                <Link href="/login" className="hover:text-yellow-300 transition">Login</Link>
+                {/* <Link href="/login" className="hover:text-yellow-300 transition">Login</Link> */}
                 <Link href="#" className="hover:text-yellow-300 transition" onClick={logoutHandler}>Logout</Link>
             </nav>
         </header>
