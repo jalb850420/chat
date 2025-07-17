@@ -19,7 +19,7 @@ export default function UserList({ users, startConversation }) {
   return (
     <aside className="w-1/4 bg-gray-100 p-4 border-l">
       <h2 className="font-bold text-lg mb-4 text-black">Usuarios disponibles</h2>
-      <ul className="space-y-2 max-h-[76vh] overflow-y-auto">
+      <ul className="space-y-2 max-h-[90vh] overflow-y-auto">
         {users.map((usuario) => {
           const isActive = tooltipUser?.login.uuid === usuario.login.uuid;
 

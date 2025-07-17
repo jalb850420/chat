@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { updateDoc, doc, arrayUnion } from "firebase/firestore";
 import { db } from "@/firebaseConfig";
 
+
 export const ChatPanel = ({ selectedChat }) => {
   const [inputMessage, setInputMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
@@ -35,77 +36,88 @@ export const ChatPanel = ({ selectedChat }) => {
     });
   };
 
-  return (
-    <div className="flex flex-col flex-1">
-      {/* Header */}
-      <div className="flex items-center justify-between border-b pb-2 mb-4">
-        <div className="flex items-center gap-2">
-          <img
-            src={selectedChat.user.picture.thumbnail}
-            alt="avatar"
-            className="w-10 h-10 rounded-full"
-          />
-          <p className="font-semibold text-black dark:text-black">
-            {selectedChat.user.name.first}
-          </p>
-        </div>
-        <button className="text-blue-600 hover:underline">Perfil</button>
-      </div>
 
-      {/* Mensajes */}
-      <div className="flex-1 overflow-y-auto space-y-4 mb-4 px-2">
-        {messageList.length > 0 ? (
-          messageList.map((message, index) => (
-            <div
-              key={index}
-              className={`flex items-start gap-2 ${
-                message.sender === "me" ? "justify-end" : ""
-              }`}
-            >
-              {message.sender !== "me" && (
-                <div className="w-8 h-8 bg-gray-300 flex items-center justify-center rounded-full text-xs font-bold">
-                  R
-                </div>
-              )}
+
+  return (
+      <div className="flex flex-col flex-1">
+        {/* Header */}
+        <div className="flex items-center justify-between border-b pb-2 mb-4">
+          <div className="flex items-center gap-2">
+            <img
+              src={selectedChat.user.picture.thumbnail}
+              alt="avatar"
+              className="w-10 h-10 rounded-full"
+            />
+            <p className="font-semibold text-black dark:text-black">
+              {selectedChat.user.name.first}
+            </p>
+          </div>
+          <button
+      onClick={() => alert('Botón funciona ✅')}
+      className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+    >
+      Perfil
+    </button>
+        </div>
+
+
+  
+        {/* Mensajes */}
+        <div className="flex-1 overflow-y-auto space-y-4 mb-4 px-2">
+          {messageList.length > 0 ? (
+            messageList.map((message, index) => (
               <div
-                className={`p-3 rounded-2xl max-w-xs text-sm ${
-                  message.sender === "me"
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-200 text-black"
+                key={index}
+                className={`flex items-start gap-2 ${
+                  message.sender === "me" ? "justify-end" : ""
                 }`}
               >
-                {message.text}
-              </div>
-              {message.sender === "me" && (
-                <div className="w-8 h-8 bg-blue-600 text-white flex items-center justify-center rounded-full text-xs font-bold">
-                  T
+                {message.sender !== "me" && (
+                  <div className="w-8 h-8 bg-gray-300 flex items-center justify-center rounded-full text-xs font-bold">
+                    R
+                  </div>
+                )}
+                <div
+                  className={`p-3 rounded-2xl max-w-xs text-sm ${
+                    message.sender === "me"
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200 text-black"
+                  }`}
+                >
+                  {message.text}
                 </div>
-              )}
-            </div>
-          ))
-        ) : (
-          <p className="text-gray-500">No hay mensajes aún.</p>
-        )}
-        <div ref={messagesEndRef} />
+                {message.sender === "me" && (
+                  <div className="w-8 h-8 bg-blue-600 text-white flex items-center justify-center rounded-full text-xs font-bold">
+                    T
+                  </div>
+                )}
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-500">No hay mensajes aún.</p>
+          )}
+          <div ref={messagesEndRef} />
+        </div>
+  
+        {/* Input de mensaje */}
+        <div className="flex items-center gap-2 border-t pt-2">
+          <input
+            type="text"
+            value={inputMessage}
+            onChange={(e) => setInputMessage(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+            placeholder="Escribe un mensaje..."
+            className="flex-1 border border-gray-300 rounded px-4 py-2"
+          />
+          <button
+            onClick={sendMessage}
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            Enviar
+          </button>
+        </div>
       </div>
-
-      {/* Input de mensaje */}
-      <div className="flex items-center gap-2 border-t pt-2">
-        <input
-          type="text"
-          value={inputMessage}
-          onChange={(e) => setInputMessage(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-          placeholder="Escribe un mensaje..."
-          className="flex-1 border border-gray-300 rounded px-4 py-2"
-        />
-        <button
-          onClick={sendMessage}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          Enviar
-        </button>
-      </div>
-    </div>
   );
 };
+
+export default ChatPanel;

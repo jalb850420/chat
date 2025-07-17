@@ -42,3 +42,62 @@ body {
   background-size: 400% 400%;
   animation: gradient-move 10s ease infinite;
 }
+
+
+
+
+
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.card-silver-glow {
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+  transition: background 0.4s ease, transform 0.4s ease;
+  cursor: pointer;
+}
+
+.card-silver-glow:hover {
+  background: linear-gradient(
+    120deg,
+    #d4d4d4 0%,
+    #ffffff 50%,
+    #d4d4d4 100%
+  );
+  animation: shimmer 2s linear infinite;
+  background-size: 300% 100%;
+  box-shadow: 0 0 12px 4px rgba(192, 192, 192, 0.8);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.card-silver-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.4), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.card-silver-glow:hover::before {
+  opacity: 1;
+}
+
+.animate-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite linear;
+}
