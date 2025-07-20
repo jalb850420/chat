@@ -96,55 +96,55 @@ export default function chat() {
       <div className="flex flex-1">
         {/* Columna izquierda - Contactos */}
         <aside className="w-1/4 bg-gray-100 p-4 border-r">
-  <h2 className="font-bold text-lg mb-4">Conversaciones</h2>
-  <ul className="space-y-2 max-h-[76vh] overflow-y-auto">
-    {chats.map((chat) => (
-      <li
-        key={chat.id}
-        onClick={() => setSelectedChat(chat)}
-        className={`group p-2 bg-white rounded shadow cursor-pointer hover:bg-blue-100 flex justify-between items-center ${
-          selectedChat?.id === chat.id ? "bg-blue-100" : ""
-        }`}
-      >
-        {/* Usuario */}
-        <div className="flex items-center gap-2">
-          <img
-            src={chat.user.picture.thumbnail}
-            alt="User"
-            className="w-8 h-8 rounded-full"
-          />
-          <span className="text-sm font-medium text-gray-800">
-            {chat.user?.name?.first} {chat.user?.name?.last}
-          </span>
-        </div>
+          <h2 className="font-bold text-lg mb-4">Conversaciones</h2>
+          <ul className="space-y-2 max-h-[76vh] overflow-y-auto">
+            {chats.map((chat) => (
+              <li
+                key={chat.id}
+                onClick={() => setSelectedChat(chat)}
+                className={`group p-2 bg-white rounded shadow cursor-pointer hover:bg-blue-100 flex justify-between items-center ${
+                  selectedChat?.id === chat.id ? "bg-blue-100" : ""
+                }`}
+              >
+                {/* Usuario */}
+                <div className="flex items-center gap-2">
+                  <img
+                    src={chat.user.picture.thumbnail}
+                    alt="User"
+                    className="w-8 h-8 rounded-full"
+                  />
+                  <span className="text-sm font-medium text-gray-800">
+                    {chat.user?.name?.first} {chat.user?.name?.last}
+                  </span>
+                </div>
 
-        {/* Acciones */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              deleteChat(chat.id);
-            }}
-            className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 text-lg transition"
-            title="Eliminar chat"
-          >
-            🗑️
-          </button>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setModalUser(chat.user);
-            }}
-            className="text-blue-500 hover:text-blue-700 text-lg transition"
-            title="Ver perfil"
-          >
-            👤
-          </button>
-        </div>
-      </li>
-    ))}
-  </ul>
-</aside>
+                {/* Acciones */}
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deleteChat(chat.id);
+                    }}
+                    className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 text-lg transition"
+                    title="Eliminar chat"
+                  >
+                    🗑️
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setModalUser(chat.user);
+                    }}
+                    className="text-blue-500 hover:text-blue-700 text-lg transition"
+                    title="Ver perfil"
+                  >
+                    👤
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </aside>
 
 
 
